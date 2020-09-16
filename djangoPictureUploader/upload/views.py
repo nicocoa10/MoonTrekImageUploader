@@ -20,4 +20,4 @@ def upload(request):
         # print(uploaded_file.size)
         fs= FileSystemStorage()
         fs.save(uploaded_file.name,uploaded_file)
-    return render(request,"upload.html")
+    return render(request,"upload/upload.html")

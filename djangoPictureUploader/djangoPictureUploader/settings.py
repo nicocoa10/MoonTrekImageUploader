@@ -17,6 +17,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Media root is where the files(pictures in this case) will be saved , its destination
 MEDIA_ROOT = os.path.join(BASE_DIR,"pictures")
+STATIC_DIR= os.path.join(BASE_DIR,'static')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -122,3 +123,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [
+    STATIC_DIR,
+
+]
