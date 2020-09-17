@@ -7,6 +7,9 @@ verify_ssl = true
 
 [packages]
 django = "*"
+nominatim = "*"
+geopy = "*"
+image = "*"
 
 [requires]
 python_version = "3.8"

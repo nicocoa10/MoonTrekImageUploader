@@ -3,7 +3,7 @@ import sys
 
 # Must have geopy and pillow installed, built on python3
 
-from geopy import Nominatim 
+from geopy import Nominatim
 from PIL import Image
 from PIL.ExifTags import TAGS
 
@@ -13,7 +13,7 @@ from PIL.ExifTags import TAGS
 # Tested and worked with photos taken directly with iPhone 11 and sent to laptop
 # Screenshots, downloads, text message downloads will strip EXIF data
 
-img_file = 'YOUR_PICTURE_NAME_HERE.JPG'
+img_file = 'IMG_1663.JPG'
 image = Image.open(img_file)
 
 exif ={}
@@ -33,7 +33,7 @@ if 'GPSInfo' in exif:
     latitude = str(float((exif['GPSInfo'][2][0]) + ((exif['GPSInfo'][2][1])/ 60) + ((exif['GPSInfo'][2][2])/3600)))
 
     longitude = str(float((exif['GPSInfo'][4][0]) + ((exif['GPSInfo'][4][1])/ 60) + ((exif['GPSInfo'][4][2])/3600)))
-    
+
     coordinates = (latitude + exif['GPSInfo'][1] + ", " + longitude + exif['GPSInfo'][3])
 
 print("Coordinates for file: " + img_file + ": ")
@@ -41,4 +41,3 @@ print("Coordinates for file: " + img_file + ": ")
 geolocation = Nominatim(user_agent = 'test/1')
 location = geolocation.reverse(coordinates)
 print(location.address)
-
