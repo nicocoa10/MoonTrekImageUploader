@@ -13,13 +13,28 @@ from PIL.ExifTags import TAGS
 # Tested and worked with photos taken directly with iPhone 11 and sent to laptop
 # Screenshots, downloads, text message downloads will strip EXIF data
 
-img_file = 'IMG_1663.JPG'
+img_file = 'test.jpg'
 image = Image.open(img_file)
 
 exif ={}
 latitude = {}
 longitude = {}
 coordinates = {}
+
+# img_exif = image.getexif()
+# if img_exif:
+#     print(type(img_exif))
+#     # <class 'PIL.Image.Exif'>
+#     print(dict(img_exif))
+#     # { .. 271: 'FUJIFILM', 305: 'Adobe Photoshop Lightroom 6.14 (Macintosh)', }
+#
+#     img_exif_dict = dict(img_exif)
+#     for key, val in img_exif_dict.items():
+#         if key in ExifTags.TAGS:
+#             print(ExifTags.TAGS[key] + " - " + str(val))
+# else:
+#     print("Sorry, image has no exif data.")
+
 
 for tag, value in image._getexif().items():
     if tag in TAGS:

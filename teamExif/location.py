@@ -2,7 +2,7 @@
 from PIL import Image
 from PIL.ExifTags import TAGS
 # creat path for images
-path = '/Users/elvira/Downloads/GettyVilla0001.JPG'
+path = 'test.jpg'
 img_file = path
 # open images
 image =Image.open(img_file)
