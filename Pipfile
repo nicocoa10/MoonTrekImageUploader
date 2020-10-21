@@ -10,6 +10,7 @@ django = "*"
 nominatim = "*"
 geopy = "*"
 image = "*"
+opencv-python = "*"
 
 [requires]
 python_version = "3.8"
