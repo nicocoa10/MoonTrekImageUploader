@@ -63,6 +63,96 @@ def extractAddress(img_file):
     location = geolocation.reverse(coordinates)
     return(location.address)
 
+# Latitude Finder here
+def extractLatitude(img_file):
+    image = Image.open(img_file)
+    exif = {}
+    latitude = {}
+    longitude = {}
+    coordinates = {}
+
+    for tag, value in image._getexif().items():
+        if tag in TAGS:
+            exif[TAGS[tag]] = value
+
+    if 'GPSInfo' not in exif:
+        print('Your file does not have GPSInfo. Please upload a photo with the appropriate metadata.')
+        # Instead of exiting out, can work to ask user for different file name instead
+
+    if 'GPSInfo' in exif:
+        latitude = str(
+            float((exif['GPSInfo'][2][0]) + ((exif['GPSInfo'][2][1]) / 60) + ((exif['GPSInfo'][2][2]) / 3600)))
+
+        coordinates = (latitude + exif['GPSInfo'][1])
+    #     N should be a positive coordinate, S should be a negative coordinate
+
+    if 'N' or 'S' in coordinates:
+        if 'N' in coordinates:
+            coord = coordinates.replace("N", "")
+        if 'S' in coordinates:
+            strippedCoordinate = coordinates.replace("S","")
+            coord = float(strippedCoordinate) * (-1)
+
+    return(str(coord))
+
+# Longitude Finder here
+def extractLongitude(img_file):
+    image = Image.open(img_file)
+    exif = {}
+    latitude = {}
+    longitude = {}
+    coordinates = {}
+
+    for tag, value in image._getexif().items():
+        if tag in TAGS:
+            exif[TAGS[tag]] = value
+
+    if 'GPSInfo' not in exif:
+        print('Your file does not have GPSInfo. Please upload a photo with the appropriate metadata.')
+        # Instead of exiting out, can work to ask user for different file name instead
+
+    if 'GPSInfo' in exif:
+        longitude = str(
+            float((exif['GPSInfo'][4][0]) + ((exif['GPSInfo'][4][1]) / 60) + ((exif['GPSInfo'][4][2]) / 3600)))
+
+        coordinates = (longitude + exif['GPSInfo'][3])
+    #     W should be a negative coordinate, E should be a positive coordinate
+    if 'W' or 'E' in coordinates:
+        if 'E' in coordinates:
+            coord = coordinates.replace("E", "")
+        if 'W' in coordinates:
+            strippedCoordinate = coordinates.replace("W","")
+            coord = float(strippedCoordinate) * (-1)
+
+    return(str(coord))
+
+# Create Coordinates Finder here
+def extractCoordinates(img_file):
+    image = Image.open(img_file)
+    exif = {}
+    latitude = {}
+    longitude = {}
+    coordinates = {}
+
+    for tag, value in image._getexif().items():
+        if tag in TAGS:
+            exif[TAGS[tag]] = value
+
+    if 'GPSInfo' not in exif:
+        print('Your file does not have GPSInfo. Please upload a photo with the appropriate metadata.')
+        # Instead of exiting out, can work to ask user for different file name instead
+
+    if 'GPSInfo' in exif:
+        latitude = str(
+            float((exif['GPSInfo'][2][0]) + ((exif['GPSInfo'][2][1]) / 60) + ((exif['GPSInfo'][2][2]) / 3600)))
+
+        longitude = str(
+            float((exif['GPSInfo'][4][0]) + ((exif['GPSInfo'][4][1]) / 60) + ((exif['GPSInfo'][4][2]) / 3600)))
+
+        coordinates = (latitude + exif['GPSInfo'][1] + ", " + longitude + exif['GPSInfo'][3])
+
+    return(coordinates)
+
 def upload(request):
     if request.method=="POST":
         form = CaptureForm(request.POST,request.FILES)
@@ -72,10 +162,13 @@ def upload(request):
             # EXIF CODE - need to add code to analyze the EXIF data
             img_file = form.cleaned_data['image']
 
-            address = extractAddress(img_file)
+            # address = extractAddress(img_file)
             time = extractTime(img_file)
+            coordinates = extractCoordinates(img_file)
+            lon = extractLongitude(img_file)
+            lat = extractLatitude(img_file)
 
-            return verify(request, address, time)  # The goal is at the end to send the user to verify page, for verification regardless if image had gps location , or it had exif data.
+            return verify(request, lon, lat, time, coordinates)  # The goal is at the end to send the user to verify page, for verification regardless if image had gps location , or it had exif data.
 
 
     else:
@@ -87,15 +180,24 @@ def upload(request):
     return render(request, "upload/upload.html", context=my_form)
 
 
-def verify(request, coordinates, time):
-    hasCoordinates = bool(coordinates)
+def verify(request, lon, lat, time, coordinates):
+    # If you want to add in the address, add "address" as a parameter of verify
+    # hasAddress = bool(address)
     hasTime = bool(time)
+    hasCoordinates = bool(coordinates)
+    hasLon = bool(lon)
+    hasLat = bool(lat)
 
     verify_dic = {
-    'coordinates':coordinates,
-    'hasCoordinates': hasCoordinates,
+    'lon':lon,
+    'hasLon':hasLon,
+    'lat':lat,
+    'hasLat':hasLat,
     'time' : time,
     'hasTime': hasTime,
+    'coordinates': coordinates,
+    'hasCoordinates': hasCoordinates,
+    # 'hasAddress': address,
     }
 
     return render(request, "upload/verify.html", context = verify_dic)
