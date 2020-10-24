@@ -15,6 +15,39 @@ from PIL.ExifTags import TAGS
 
 # img_file = 'moon1.jpg'
 
+# Latitude Finder here
+def extractLatitude(img_file):
+    image = Image.open(img_file)
+    exif = {}
+    latitude = {}
+    longitude = {}
+    coordinates = {}
+
+    for tag, value in image._getexif().items():
+        if tag in TAGS:
+            exif[TAGS[tag]] = value
+
+    if 'GPSInfo' not in exif:
+        print('Your file does not have GPSInfo. Please upload a photo with the appropriate metadata.')
+        # Instead of exiting out, can work to ask user for different file name instead
+
+    if 'GPSInfo' in exif:
+        latitude = str(
+            float((exif['GPSInfo'][2][0]) + ((exif['GPSInfo'][2][1]) / 60) + ((exif['GPSInfo'][2][2]) / 3600)))
+
+
+        coordinates = (latitude + exif['GPSInfo'][1])
+    #     N should be a positive coordinate, S should be a negative coordinate
+
+    if 'N' or 'S' in coordinates:
+        if 'N' in coordinates:
+            coord = coordinates.replace("N", "")
+        if 'S' in coordinates:
+            strippedCoordinate = coordinates.replace("S","")
+            coord = float(strippedCoordinate) * (-1)
+
+    return(str(coord))
+
 # Longitude Finder here
 def extractLongitude(img_file):
     image = Image.open(img_file)
@@ -36,35 +69,16 @@ def extractLongitude(img_file):
             float((exif['GPSInfo'][4][0]) + ((exif['GPSInfo'][4][1]) / 60) + ((exif['GPSInfo'][4][2]) / 3600)))
 
         coordinates = (longitude + exif['GPSInfo'][3])
+    #     W should be a negative coordinate, E should be a positive coordinate
+    if 'W' or 'E' in coordinates:
+        if 'E' in coordinates:
+            coord = coordinates.replace("E", "")
+        if 'W' in coordinates:
+            strippedCoordinate = coordinates.replace("W","")
+            coord = float(strippedCoordinate) * (-1)
 
-    return(coordinates)
-print(extractLongitude('iphonePic.JPG'))
+    return(str(coord))
 
-# Latitude Finder here
-def extractLatitude(img_file):
-    image = Image.open(img_file)
-    exif = {}
-    latitude = {}
-    longitude = {}
-    coordinates = {}
-
-    for tag, value in image._getexif().items():
-        if tag in TAGS:
-            exif[TAGS[tag]] = value
-
-    if 'GPSInfo' not in exif:
-        print('Your file does not have GPSInfo. Please upload a photo with the appropriate metadata.')
-        # Instead of exiting out, can work to ask user for different file name instead
-
-    if 'GPSInfo' in exif:
-        latitude = str(
-            float((exif['GPSInfo'][2][0]) + ((exif['GPSInfo'][2][1]) / 60) + ((exif['GPSInfo'][2][2]) / 3600)))
-
-        coordinates = (latitude + exif['GPSInfo'][1] )
-
-    return(coordinates)
-
-print(extractLatitude('iphonePic.JPG'))
 #Show tags
 def showTags(img_file):
     image = Image.open(img_file)
@@ -75,10 +89,9 @@ def showTags(img_file):
             exif[TAGS[tag]] = value
             print(str(TAGS[tag]) + ": " + str(value))
 
-
 # showTags('iphonePic.JPG')
 
-# Make time function here
+# Time function
 def extractTime(img_file):
     image = Image.open(img_file)
     exif = {}
@@ -94,9 +107,7 @@ def extractTime(img_file):
         return(exif['DateTimeOriginal'])
 
 
-
-
-# Create Address Finder here
+# Specific Address Finder
 def extractAddress(img_file):
     image = Image.open(img_file)
     exif = {}
@@ -125,28 +136,7 @@ def extractAddress(img_file):
     location = geolocation.reverse(coordinates)
     return(location.address)
 
-print(extractTime('iphonePic.JPG'))
-print(extractAddress('iphonePic.JPG'))
+latitude = extractLatitude('iphonePic.JPG')
+longitude = extractLongitude('iphonePic.JPG')
 
-# Check which tags are available.
-# for tag in exif:
-#     print(tag)
-# Handle a photo with no GPS information (no coordinates)
-# if 'GPSInfo' not in exif:
-#  print('Your file does not have GPSInfo. Please upload a photo with the appropriate metadata.')
-#  sys.exit()
-#  # Instead of exiting out, can work to ask user for different file name instead
-#
-# if 'GPSInfo' in exif:
-#     latitude = str(float((exif['GPSInfo'][2][0]) + ((exif['GPSInfo'][2][1])/ 60) + ((exif['GPSInfo'][2][2])/3600)))
-#
-#     longitude = str(float((exif['GPSInfo'][4][0]) + ((exif['GPSInfo'][4][1])/ 60) + ((exif['GPSInfo'][4][2])/3600)))
-#
-#     coordinates = (latitude + exif['GPSInfo'][1] + ", " + longitude + exif['GPSInfo'][3])
-#
-# print("Address for file: " + img_file + ": ")
-#
-# geolocation = Nominatim(user_agent = 'test/1')
-# location = geolocation.reverse(coordinates)
-# print(location.address)
-
+print(latitude + ", " + longitude)
