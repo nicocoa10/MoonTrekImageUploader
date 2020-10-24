@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Verify</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+</head>
+<body>
+<div class="container">
+<h1>verifying page</h1>
+
+<div>
+    <p> <b>If youre in this page in means the picture was succesfully uploaded to our Database , now we need to verify a few things</b> </p>
+
+    <p> The goal of this page is to verify with the user the image they uploaded </p>
+    <p> If an user submitted a picture with gps data we will ask them if thats the correct location and time</p>
+    <p> If an user submitted a picture with no gps location or exif data we will ask them for it in the page</p>
+    <p> I guess once we get this confirmation we should save it in DB?</p>
+	
+	<div>
+		<p>Coordinates:
+			<span>
+				{{ coordinates }}
+			</span>
+		</p>
+	</div>
+
+
+</div>
+</div>
+
+</body>
+</html>
