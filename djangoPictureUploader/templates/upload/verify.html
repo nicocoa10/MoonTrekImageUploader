@@ -9,7 +9,7 @@
 <body>
 <div class="container">
 
-<h1>verify page</h1>
+<h1>Verify Page</h1>
 
 <div>
     <p> <b>If youre in this page in means the picture was succesfully uploaded to our Database , But is missing important data</b> </p>
@@ -36,6 +36,17 @@
 		<p>Time:
 				<span> {{ time }} </span>
 		</p>
+	</div>
+
+	<div>
+		<p>Please provide information below</p>
+		<form method="post"  action="{% url 'upload:verify' %}">
+                {% csrf_token %}
+                {{ verify_form.as_p }}
+
+                <button type="submit" class="button">Submit</button>
+
+            </form>
 	</div>
 
 
