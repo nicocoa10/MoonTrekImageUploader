@@ -8,16 +8,26 @@
 </head>
 <body>
 <div class="container">
+
 <h1>verify page</h1>
 
 <div>
-    <p> <b>If youre in this page in means the picture was succesfully uploaded to our Database , now we need to verify a few things</b> </p>
+    <p> <b>If youre in this page in means the picture was succesfully uploaded to our Database , But is missing important data</b> </p>
 
     <p> The goal of this page is to verify with the user the image they uploaded </p>
 	<div>
 		<p>Address:
 			{% if hasCoordinates %}
-			<span> {{ coordinates }}</span>
+<!--			<span> {{ coordinates }}</span>-->
+			<div>
+				<ul style = "list-style-type: square">
+				 <li> <p>Latitude: {{ lat }} </p></li>
+				<li> <p>Longitude: {{ lon }} </p></li>
+				<li> <p>Time: {{ time }} </p></li>
+				<li> <p>Coordinates as a pair (in traditional LAT,LON): {{ coordinates }} </p></li>
+<!--		  	<li> <p>Address: {{ address }} </p></li>-->
+				</ul>
+			</div>
 			{% else %}
 			<span>Your Image does not contain location data</span>
 			{% endif %}
@@ -27,7 +37,8 @@
 				<span> {{ time }} </span>
 		</p>
 	</div>
-	<p> If address is false and time none then ask the user to validate the data by displaying a form or redirecting to another page with a form</p>
+
+
 
 
 

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Choose call</title>
+</head>
+<body>
+
+<h3>Your image succesfully contains <b>Location</b> and <b>Time</b> data </h3>
+
+<ul style = "list-style-type: square">
+    <li> <p>Latitude: {{ lat }} </p></li>
+    <li> <p>Longitude: {{ lon }} </p></li>
+    <li> <p>Time: {{ time }} </p></li>
+</ul>
+<p>Make an API call</p>
+<p>
+    <a href="{% url 'upload:nearest_point' lon=lon lat=lat time=time %}">Nearest Point</a> |
+    <a href="{% url 'upload:vector' time=time %}">Vector </a>
+</p>
+
+
+</body>
+</html>

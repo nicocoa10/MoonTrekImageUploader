@@ -7,6 +7,7 @@ app_name = "upload"
 urlpatterns= [
     path('', views.upload, name="upload"), #here is the upload view path url patterns
     path('upload/verify/', views.verify, name="verify"),
-    path('upload/vector/', views.planetVectorAPICall, name="vector"),
-    path('upload/nearest_point/', views.nearestPointAPICall, name="nearest_point")
+    path('upload/choose_call/', views.chooseCall, name="choose_call"),
+    path('upload/vector/<time>/', views.planetVectorAPICall, name="vector"),
+    path('upload/nearest_point/<lon>/<lat>/<time>', views.nearestPointAPICall, name="nearest_point")
 ]
