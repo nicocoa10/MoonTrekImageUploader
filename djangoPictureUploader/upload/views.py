@@ -343,3 +343,11 @@ def display3d(self):
 
 def displayMoon(self):
     return render(self, "upload/3DMoon.html")
+
+def display3DModel(request,lon,lat,time):
+
+    model_dic= {
+
+    }
+    return render(request, "upload/3d_model.html", context=model_dic)
+

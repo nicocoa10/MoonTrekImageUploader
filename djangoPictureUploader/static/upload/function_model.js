@@ -1,0 +1,96 @@
+var scene = new THREE.Scene();
+var camera = new THREE.PerspectiveCamera( 35, window.innerWidth/window.innerHeight, 0.1, 1000 );
+
+var renderer = new THREE.WebGLRenderer();
+renderer.setSize( window.innerWidth, window.innerHeight );
+document.body.appendChild( renderer.domElement );
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+var controls = new THREE.OrbitControls(camera, renderer.domElement);
+camera.position.set( 0, 2, 50 );
+controls.update();
+
+const light = new THREE.PointLight( 0xffffff, 2, 500);
+light.position.set( -100, 0, 0 );
+light.castShadow = true;
+scene.add( light );
+
+light.shadow.mapSize.width = 512;
+light.shadow.mapSize.height = 512;
+light.shadow.camera.near = 0.5;
+light.shadow.camera.far = 500;
+
+var texture = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/GerardRosario/3DMoonstuff/main/moonstuff/MoonColorMap.jpg" );
+var texture2 = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/GerardRosario/3DMoonstuff/main/moonstuff/EarthColorMap.jpg" );
+var texture3 = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/GerardRosario/3DMoonstuff/main/moonstuff/Suntxt.jpg" );
+
+
+function getRandomStarField(numberOfStars, width, height) {
+var canvas = document.createElement('CANVAS');
+canvas.width = width;
+canvas.height = height;
+
+var ctx = canvas.getContext('2d');
+
+ctx.fillStyle="black";
+ctx.fillRect(0, 0, width, height);
+
+for (var i = 0; i < numberOfStars; ++i) {
+var radius = Math.random() * 2;
+var x = Math.floor(Math.random() * width);
+var y = Math.floor(Math.random() * height);
+
+ctx.beginPath();
+ctx.arc(x, y, radius, 0, 2 * Math.PI, false);
+ctx.fillStyle = 'white';
+ctx.fill();
+}
+
+var texture = new THREE.Texture(canvas);
+texture.needsUpdate = true;
+return texture;
+};
+
+var skyBox = new THREE.BoxGeometry(1000, 700, 700);
+var skyBoxMaterial = new THREE.MeshBasicMaterial({
+map: getRandomStarField(600, 1500, 1500),
+side: THREE.BackSide
+});
+var sky = new THREE.Mesh(skyBox, skyBoxMaterial);
+scene.add(sky);
+
+var geometry = new THREE.SphereGeometry( 0.27, 32, 32);
+var geometry2 = new THREE.SphereGeometry( 1, 32, 32);
+var geometry3 = new THREE.SphereGeometry( 109.2, 32, 32);
+
+var material = new THREE.MeshPhongMaterial( { map: texture } );
+var material2 = new THREE.MeshPhongMaterial( { map: texture2 } );
+var material3 = new THREE.MeshPhongMaterial( { map: texture3 } );
+
+var sphere = new THREE.Mesh( geometry, material );
+var sphere2 = new THREE.Mesh( geometry2, material2 );
+var sphere3 = new THREE.Mesh( geometry3, material3 );
+sphere.castShadow = true;
+sphere.receiveShadow = true;
+sphere2.castShadow = true;
+sphere2.receiveShadow = true;
+scene.add( sphere );
+scene.add( sphere2 );
+scene.add( sphere3 );
+
+sphere.position.x = 0;
+
+sphere2.position.x = 3.7;
+
+sphere3.position.x = -370;
+
+camera.position.z = 5;
+
+var animate = function () {
+requestAnimationFrame( animate );
+
+renderer.render( scene, camera );
+};
+
+animate();

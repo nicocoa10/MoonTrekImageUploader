@@ -9,5 +9,7 @@ urlpatterns= [
     path('upload/verify/', views.verify, name="verify"),
     path('upload/choose_call/', views.chooseCall, name="choose_call"),
     path('upload/vector/<time>/', views.planetVectorAPICall, name="vector"),
-    path('upload/nearest_point/<lon>/<lat>/<time>', views.nearestPointAPICall, name="nearest_point")
+    path('upload/nearest_point/<lon>/<lat>/<time>', views.nearestPointAPICall, name="nearest_point"),
+    path('upload/3d_model/<lon>/<lat>/<time>', views.display3DModel, name="3d_model")
+
 ]
