@@ -1,7 +1,7 @@
 # Moon Trek Telescope 
 Upload pictures of the moon to our server that runs with Django 
 
-#Description
+# Description
 Creating a Web Application in which the user will be able to provide an image from a telescope. When feeding an image of the moon from a telescope, the application will provide additional information to the user about its moon feed. The features that are provided are important annotations such as important landing sites, local temperatures, chemical makeups of the soil -- such as iron, etc. 
 
 Technologies
