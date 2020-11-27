@@ -14,3 +14,14 @@ Technologies
 Currently in Development
 
 To learn more about this project visit our school's project page :  https://csns.calstatela.edu/department/cs/project/view?id=7808919
+
+
+Image is routed from telescope to application 
+![Telescope Moon Trek ](https://raw.githubusercontent.com/nicocoa10/MoonTrekImageUploader/master/Screen%20Shot%202020-11-26%20at%204.00.49%20PM.png)
+
+Image is layered with layer from JPL Moon Trek portal
+![Telescope Moon Trek ](https://raw.githubusercontent.com/nicocoa10/MoonTrekImageUploader/master/Screen%20Shot%202020-11-26%20at%204.01.00%20PM.png)
+
+The approach 
+![Telescope Moon Trek ](https://raw.githubusercontent.com/nicocoa10/MoonTrekImageUploader/master/Screen%20Shot%202020-11-26%20at%204.01.10%20PM.png)
+
