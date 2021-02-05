@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.min.js"></script>
+	<!-- <script src="/Users/Albert/Downloads/three.js-master/src/loaders/ObjectLoader.js"></script> -->
+	<!-- <script src="./js/MTLLoader.js"></script> -->
+	<script type="module">
+		// import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.min.js';
+		import {GLTFLoader} from '/GLTFLoader.js';
+
+	</script>
+	<script>
+		const scene = new THREE.Scene();
+
+		const light = new THREE.DirectionalLight('#f0f0f0', 0.9);
+		light.position.set(-20,0,100);
+		scene.add(light);
+
+		const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+
+		const renderer = new THREE.WebGLRenderer();
+		renderer.setSize(window.innerWidth, window.innerHeight);
+		document.body.appendChild(renderer.domElement);
+
+		function render(){
+			requestAnimationFrame(render);
+			renderer.render(scene, camera);
+		}
+		render();
+	</script>
+</body>
+</html>
