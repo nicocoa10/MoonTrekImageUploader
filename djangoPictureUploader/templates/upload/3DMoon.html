@@ -1,0 +1,58 @@
+<!-- {% load static %} -->
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.min.js"></script>
+	<!-- <script type="text/javascript" src="{% static '/static/upload/OBJLoader.js' %}"></script> -->
+	<!-- <script type="module">
+		import {OBJLoader} from '/static/upload/OBJLoader.js';
+	</script> -->
+	<!-- <script type="text/javascript" src="{% static '/upload/MTLLoader.js' %}"></script> -->
+	<script type="module">
+		import {MTLLoader} from '/static/upload/MTLLoader.js';
+	</script>
+
+
+	<script>
+		const scene = new THREE.Scene();
+
+		const light = new THREE.DirectionalLight('#f0f0f0', 0.9);
+		light.position.set(-20,0,100);
+		scene.add(light);
+
+		const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+
+		const renderer = new THREE.WebGLRenderer();
+		renderer.setSize(window.innerWidth, window.innerHeight);
+		document.body.appendChild(renderer.domElement);
+
+		// const objLoader = new THREE.OBJLoader();
+		// objLoader.setPath('/upload/');
+
+		// const mtlLoader = new THREE.MTLLoader();
+		// mtlLoader.setPath('/upload/');
+
+		// new Promise((resolve) => {
+		// 	mtlLoader.load('blenderMoon1object.mtl', (materials) => {
+		// 		resolve(materials);
+		// 	})
+		// })
+		// .then((materials) => {
+		// 	materials.preload();
+		// 	objLoader.setMaterials(materials);
+		// 	objLoader.load('blenderMoon1object.obj',(object) => {
+		// 		scene.add(object);
+		// 	})
+		// })
+
+		// function render(){
+		// 	requestAnimationFrame(render);
+		// 	renderer.render(scene, camera);
+		// }
+		// render();
+	</script>
+</body>
+</html>

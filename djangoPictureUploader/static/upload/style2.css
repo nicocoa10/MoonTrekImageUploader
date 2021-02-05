@@ -1,51 +1,147 @@
-#upload {
-    opacity: 0;
+.color-black {
+  background: black;
+}
+.gradient-dark {
+  background-image: linear-gradient(to bottom left, black, grey);
+}
+.gradient-bluegreen {
+  background-image: linear-gradient(to bottom left, blue, green);
+}
+.float-left {
+  float: left;
+}
+.float-right {
+  float: right;
+}
+.image-style {
+  float: left;
+  margin-left: 10%;
+  margin-right: 5%;
+  padding-bottom: 150px;
+  /* border: dashed; */
+}
+.bg-grey {
+  background: #141414;
 }
 
-#upload-label {
-    position: absolute;
-    top: 50%;
-    left: 1rem;
-    transform: translateY(-50%);
+.bg-red {
+  background-color: red;
 }
 
-.image-area {
-    border: 2px dashed rgba(255, 255, 255, 0.7);
-    padding: 1rem;
-    position: relative;
+.starry-background{
+  background-image: url("reducedStarryNight.png");
 }
 
-.image-area::before {
-    content: 'Uploaded image result';
-    color: #fff;
-    font-weight: bold;
-    text-transform: uppercase;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 0.8rem;
-    z-index: 1;
+.tiny {
+  font-size: 12px;
 }
 
-.image-area img {
-    z-index: 2;
-    position: relative;
+.title-text {
+  font-size: 36px;
+  font-family: 'Merriweather', serif;
+  font-weight: 700;
+  color: #D8D8D8;
+  margin: 0;
 }
 
-body {
-    min-height: 100vh;
-    background-color: #757f9a;
-    background-image: linear-gradient(147deg, #757f9a 0%, #d7dde8 100%);
+.trek-text {
+  font-size: 20px;
+  font-family: 'Poppins', sans-serif;
+  color: white;
+  padding-right: 150px;
+  /* border: dotted; */
+}
+.headlines {
+  font-size: 50px;
+  font-family: 'Poppins', sans-serif;
+  color: white;
+}
+/* old stuff */ /* old stuff */ /* old stuff */ /* old stuff */ /* old stuff */ /* old stuff */ /* old stuff */
+.skill-row {
+    width: 50%;
+    margin: 100px auto 100px auto;
+    text-align: left;
+    line-height: 2;
+}
+.navbar-brand {
+  /* background: blue; */
+  width: 100%;
+  margin-right: 0px;
+  /*    padding: 0px;*/
+  border: 0px;
+  text-align: center;
 }
 
-.button {
-    position: relative;
-    margin-top: 30px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #757f9a;
-    border-radius: 12px;
+.navbar {
+  margin-right: 0;
+  border: 0;
+  padding: 0;
 }
-/*
+
+.body-container {
+  /*    background-image: url("nightskyBackground2.png");*/
+  padding: 10rem 17rem 10rem 17rem;
+  /*    margin-left: 200px;*/
+  background: #222222;
+}
+
+.body-container-above {
+  background: green;
+  width: 40%;
+  /*    padding: 2rem 10rem 2rem 10rem;*/
+  margin-left: 40rem;
+  text-align: right;
+}
+
+.moon-image {
+  float: right;
+  margin-right: 30px;
+}
+
+
+.text-aligned-right {
+  color: white;
+  font-size: 15px;
+  float: right;
+  margin-right: 30px;
+}
+
+
+.btn-primary-colored {
+  font-size: 18px;
+  padding: 0.5rem;
+  background: #898989;
+  letter-spacing: 1px;
+  line-height: 15px;
+  border: #898989;
+  border-radius: 40px;
+  /*  background: transparent;*/
+  transition: all 0.3s ease 0s;
+}
+
+.skill-row {
+  width: 50%;
+  margin: 100px auto 100px auto;
+  text-align: left;
+  line-height: 2;
+}
+
+.center {
+  /* padding: 50px 0 50px 0; */
+  text-align: center;
+  
+  margin-left: 25%;
+  margin-right: 25%;
+}
+
+.btn-primary-colored:hover {
+  font-size: 18px;
+  padding: 0.5rem;
+  background: #4E4E4E;
+  letter-spacing: 1px;
+  line-height: 15px;
+  border: #4E4E4E;
+  border-radius: 40px;
+  /*  background: transparent;*/
+  transition: all 0.3s ease 0s;
+}
